@@ -1,4 +1,5 @@
-import { ExternalLink, Github } from "lucide-react";
+// fileName: Projects.tsx
+import { ExternalLink, Github, Folder } from "lucide-react";
 
 interface Project {
   id: number;
@@ -18,10 +19,9 @@ const projects: Project[] = [
       "Built a crypto exchange platform with live tickers, depth charts, and real-time order books.",
       "Created a WebSocket pub/sub system to send live market data to clients.",
       "Used Redis for in-memory order books and fast order matching.",
-      "Implemented limit orders, market orders, bid-ask spread, and market maker simulation.",
     ],
-    tags: ["TypeScript", "Next.js", "Node.js", "Redis", "WebSockets", "PostgreSQL"],
-    github: "https://github.com/DeekshithV",
+    tags: ["TypeScript", "Next.js", "Node.js", "Redis", "WebSockets"],
+    github: "https://github.com/Deeku-01",
     image: "📈",
   },
   {
@@ -30,11 +30,9 @@ const projects: Project[] = [
     description: [
       "Built a collaborative platform where users can exchange skills and services without monetary transactions.",
       "Implemented skill listing, search, and user-to-user matching features.",
-      "Integrated real-time chat using Socket.io for seamless negotiation between users.",
-      "Designed responsive UI with Tailwind CSS and Radix UI components.",
     ],
-    tags: ["React", "Express", "Prisma", "Socket.io", "TypeScript", "Zod"],
-    github: "https://github.com/DeekshithV",
+    tags: ["React", "Express", "Prisma", "Socket.io", "TypeScript"],
+    github: "https://github.com/Deeku-01",
     image: "🔄",
   },
   {
@@ -42,43 +40,38 @@ const projects: Project[] = [
     title: "Metaverse Game",
     description: [
       "Built a real-time 2D virtual world with multiplayer avatar movement and state sync over WebSockets.",
-      "Built a modular monorepo architecture using Turborepo for scalable code management.",
-      "Implemented rooms/sessions and server-authoritative updates via Express + Socket.io.",
-      "Followed Test-Driven Development (TDD) using Jest to ensure code reliability.",
+      "Built a modular monorepo architecture using Turborepo.",
     ],
-    tags: ["React", "Express", "Prisma", "Socket.io", "TypeScript", "Jest", "Turborepo"],
-    github: "https://github.com/DeekshithV",
+    tags: ["React", "Express", "Socket.io", "TypeScript", "Turborepo"],
+    github: "https://github.com/Deeku-01",
     image: "🎮",
   },
 ];
 
 const Projects = () => {
   return (
-    <div className="mb-16 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="section-title mb-0">Projects</h2>
-      </div>
+    <div className="mb-20 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+      <h2 className="section-title mb-6 flex items-center gap-2">
+        <Folder className="w-5 h-5" /> Projects
+      </h2>
 
-      <div className="grid gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project) => (
           <div
             key={project.id}
-            className="bg-card border border-border rounded-xl p-6 hover:shadow-md transition-all hover:border-primary/20"
+            className="group flex flex-col bg-card border border-border/60 rounded-xl p-5 hover:border-primary/50 transition-colors duration-300"
           >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">
                 {project.image}
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg text-foreground">{project.title}</h3>
-              </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 opacity-70 group-hover:opacity-100 transition-opacity">
                 {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="hover:text-primary transition-colors"
                   >
                     <Github className="w-5 h-5" />
                   </a>
@@ -88,7 +81,7 @@ const Projects = () => {
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="hover:text-primary transition-colors"
                   >
                     <ExternalLink className="w-5 h-5" />
                   </a>
@@ -96,20 +89,23 @@ const Projects = () => {
               </div>
             </div>
 
-            <ul className="text-muted-foreground text-sm leading-relaxed mb-4 space-y-1">
-              {project.description.map((item, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+            <h3 className="font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+              {project.title}
+            </h3>
 
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
+            {/* START: Updated Description Rendering */}
+            <ul className="space-y-1 text-muted-foreground text-sm leading-relaxed mb-6 flex-1 list-disc ml-4">
+               {project.description.map((item, index) => (
+                 <li key={index} className="pl-1">{item}</li>
+               ))}
+            </ul>
+            {/* END: Updated Description Rendering */}
+
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {project.tags.slice(0, 4).map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-1 bg-secondary text-secondary-foreground text-xs rounded-md"
+                  className="px-2 py-1 bg-secondary/50 text-secondary-foreground text-xs rounded-md border border-transparent hover:border-border transition-colors"
                 >
                   {tag}
                 </span>

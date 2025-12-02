@@ -7,28 +7,29 @@ interface MobileNavProps {
 
 const navItems = [
   { id: "home", label: "Home", icon: Home },
-  { id: "experience", label: "Experience", icon: Briefcase },
-  { id: "projects", label: "Projects", icon: FolderOpen },
-  { id: "articles", label: "Articles", icon: FileText },
+  { id: "experience", label: "Exp", icon: Briefcase },
+  { id: "projects", label: "Work", icon: FolderOpen },
+  { id: "articles", label: "Blog", icon: FileText },
 ];
 
 const MobileNav = ({ activeSection, onSectionChange }: MobileNavProps) => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-border p-2 flex justify-around lg:hidden z-50">
+    <nav className="fixed bottom-4 left-4 right-4 bg-background/80 backdrop-blur-md border border-border/50 p-2 flex justify-between rounded-2xl shadow-lg lg:hidden z-50 max-w-md mx-auto">
       {navItems.map((item) => {
         const Icon = item.icon;
+        const isActive = activeSection === item.id;
         return (
           <button
             key={item.id}
             onClick={() => onSectionChange(item.id)}
-            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors ${
-              activeSection === item.id
-                ? "text-primary"
-                : "text-muted-foreground"
+            className={`flex flex-col items-center justify-center w-full py-2 rounded-xl transition-all duration-200 ${
+              isActive
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-muted/50"
             }`}
           >
-            <Icon className="w-5 h-5" />
-            <span className="text-xs">{item.label}</span>
+            <Icon className={`w-5 h-5 mb-0.5 ${isActive ? "fill-primary/20" : ""}`} />
+            <span className="text-[10px] font-medium">{item.label}</span>
           </button>
         );
       })}
