@@ -6,6 +6,7 @@ import HeroSection from "@/components/HeroSection";
 import GitHubContributions from "@/components/GitHubContributions";
 import WorkExperience from "@/components/WorkExperience";
 import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
 import Articles from "@/components/Articles";
 
 const Index = () => {
@@ -24,6 +25,7 @@ const Index = () => {
             <HeroSection />
             <GitHubContributions />
             <WorkExperience />
+            <Skills />
           </>
         )}
         
