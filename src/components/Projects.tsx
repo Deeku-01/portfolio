@@ -1,12 +1,11 @@
-import { ExternalLink, Github, Star } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 
 interface Project {
   id: number;
   title: string;
-  description: string;
+  description: string[];
   tags: string[];
-  stars: number;
-  github: string;
+  github?: string;
   demo?: string;
   image: string;
 }
@@ -14,32 +13,42 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "AI Chat Platform",
-    description: "A real-time AI-powered chat platform with multiple language model integrations, streaming responses, and conversation history.",
-    tags: ["React", "TypeScript", "OpenAI", "WebSocket"],
-    stars: 234,
-    github: "#",
-    demo: "#",
-    image: "🤖",
+    title: "Crypto Exchange Platform",
+    description: [
+      "Built a crypto exchange platform with live tickers, depth charts, and real-time order books.",
+      "Created a WebSocket pub/sub system to send live market data to clients.",
+      "Used Redis for in-memory order books and fast order matching.",
+      "Implemented limit orders, market orders, bid-ask spread, and market maker simulation.",
+    ],
+    tags: ["TypeScript", "Next.js", "Node.js", "Redis", "WebSockets", "PostgreSQL"],
+    github: "https://github.com/DeekshithV",
+    image: "📈",
   },
   {
     id: 2,
-    title: "Developer Portfolio Builder",
-    description: "An open-source tool to create beautiful developer portfolios with customizable themes and easy deployment options.",
-    tags: ["Next.js", "Tailwind", "MDX"],
-    stars: 189,
-    github: "#",
-    demo: "#",
-    image: "📁",
+    title: "UpBartr",
+    description: [
+      "Built a collaborative platform where users can exchange skills and services without monetary transactions.",
+      "Implemented skill listing, search, and user-to-user matching features.",
+      "Integrated real-time chat using Socket.io for seamless negotiation between users.",
+      "Designed responsive UI with Tailwind CSS and Radix UI components.",
+    ],
+    tags: ["React", "Express", "Prisma", "Socket.io", "TypeScript", "Zod"],
+    github: "https://github.com/DeekshithV",
+    image: "🔄",
   },
   {
     id: 3,
-    title: "Task Management API",
-    description: "A robust REST API for task management with authentication, real-time updates, and team collaboration features.",
-    tags: ["Node.js", "Express", "PostgreSQL", "Redis"],
-    stars: 156,
-    github: "#",
-    image: "📋",
+    title: "Metaverse Game",
+    description: [
+      "Built a real-time 2D virtual world with multiplayer avatar movement and state sync over WebSockets.",
+      "Built a modular monorepo architecture using Turborepo for scalable code management.",
+      "Implemented rooms/sessions and server-authoritative updates via Express + Socket.io.",
+      "Followed Test-Driven Development (TDD) using Jest to ensure code reliability.",
+    ],
+    tags: ["React", "Express", "Prisma", "Socket.io", "TypeScript", "Jest", "Turborepo"],
+    github: "https://github.com/DeekshithV",
+    image: "🎮",
   },
 ];
 
@@ -47,13 +56,10 @@ const Projects = () => {
   return (
     <div className="mb-16 animate-fade-in" style={{ animationDelay: "0.4s" }}>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="section-title mb-0">Featured Projects</h2>
-        <a href="#" className="text-primary text-sm hover:underline">
-          See All
-        </a>
+        <h2 className="section-title mb-0">Projects</h2>
       </div>
-      
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+
+      <div className="grid gap-6">
         {projects.map((project) => (
           <div
             key={project.id}
@@ -64,46 +70,50 @@ const Projects = () => {
                 {project.image}
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-foreground mb-1">{project.title}</h3>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  {project.stars}
-                </div>
+                <h3 className="font-semibold text-lg text-foreground">{project.title}</h3>
+              </div>
+              <div className="flex items-center gap-3">
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
+                )}
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
+                )}
               </div>
             </div>
-            
-            <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-              {project.description}
-            </p>
-            
-            <div className="flex flex-wrap gap-2 mb-4">
+
+            <ul className="text-muted-foreground text-sm leading-relaxed mb-4 space-y-1">
+              {project.description.map((item, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-1 bg-secondary text-secondary-foreground text-xs rounded-full"
+                  className="px-2.5 py-1 bg-secondary text-secondary-foreground text-xs rounded-md"
                 >
                   {tag}
                 </span>
               ))}
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <a
-                href={project.github}
-                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Github className="w-4 h-4" />
-                Code
-              </a>
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Demo
-                </a>
-              )}
             </div>
           </div>
         ))}
