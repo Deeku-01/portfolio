@@ -106,7 +106,7 @@ const ProjectCard = ({
           {displayedTech.map((tech) => (
             <span
               key={tech}
-              className="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-md"
+              className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-md"
             >
               {tech}
             </span>

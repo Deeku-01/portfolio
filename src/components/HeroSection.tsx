@@ -16,7 +16,7 @@ const HeroSection = () => {
       <p className="text-muted-foreground text-lg leading-relaxed max-w-4xl mb-8">
         <span className="text-primary text-2xl font-semibold font-instrument-serif">I don't just write code; I design systems.</span> Blending full-stack development with a strong foundation in cybersecurity, I specialize in delivering accessible and performant web applications. 
         My next challenge involves diving deep into DevOps and the architecture of complex, distributed systems.<br></br>
-        Currently preparing to join <a className="text-foreground underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80">Oracle</a> as an Associate Software Developer.
+        {/* Currently preparing to join <a className="text-foreground underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80">Oracle</a> as an Associate Software Developer. */}
       </p>
 
       <div className="flex flex-wrap items-center gap-4">

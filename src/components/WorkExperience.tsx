@@ -64,7 +64,7 @@ const experiences: Experience[] = [
 
 // *** UPDATED STATS DATA ***
 const stats = [
-  { label: "Ransomware Research Projects", value: "1" },
+  { label: "Ransomware Research Projects", value: "2" },
   { label: "Software Dev Experience", value: "1+ Year" },
   { label: "Personal Projects", value: "5+" },
   { label: "Total Code Contribution", value: "8000+ Lines" }, // Adjusted from Hours to a different metric
