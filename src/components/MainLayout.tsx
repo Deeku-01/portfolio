@@ -1,6 +1,6 @@
 // fileName: MainLayout.tsx
 import Sidebar from "@/components/Sidebar";
-import MobileNav from "@/components/MobileNav";
+import MobileNav from "@/components/MobileNav"; // Import MobileNav
 import TopBar from "@/components/TopBar";
 import ProfileHeader from "@/components/ProfileHeader";
 
@@ -14,8 +14,9 @@ const MainLayout = () => {
       {/* Top Bar - Desktop */}
       <TopBar />
       
-      {/* Mobile Nav - only visible on mobile */}
-      <MobileNav />
+      {/* Mobile Nav - uses react-router-dom's NavLink */}
+      {/* The component from the user's previous upload was for TopBar, so this is the correct place to put the new MobileNav */}
+      <MobileNav /> 
       
       {/* Main Layout Container */}
       <div className="max-w-7xl mx-auto flex relative pt-16 md:pt-20">
@@ -36,6 +37,7 @@ const MainLayout = () => {
       </div>
       
       <MusicButton />
+      {/* MobileNav will naturally float above the MusicButton due to z-index: 50 */}
     </div>
   );
 };
