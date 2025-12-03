@@ -1,3 +1,4 @@
+// fileName: MobileNav.tsx
 import { Home, Briefcase, FolderOpen, FileText } from "lucide-react";
 
 interface MobileNavProps {
@@ -6,10 +7,10 @@ interface MobileNavProps {
 }
 
 const navItems = [
-  { id: "home", label: "Home", icon: Home },
-  { id: "experience", label: "Exp", icon: Briefcase },
-  { id: "projects", label: "Work", icon: FolderOpen },
-  { id: "articles", label: "Blog", icon: FileText },
+  { id: "home", label: "Home", icon: Home, path: "/" },
+  { id: "experience", label: "Experience", icon: Briefcase, path: "/experience" }, // Updated label and added path
+  { id: "projects", label: "Projects", icon: FolderOpen, path: "/projects" },      // Updated label and added path
+  // { id: "articles", label: "Blog", icon: FileText, path: "/articles" }, // Removed based on previous context
 ];
 
 const MobileNav = ({ activeSection, onSectionChange }: MobileNavProps) => {
@@ -19,8 +20,9 @@ const MobileNav = ({ activeSection, onSectionChange }: MobileNavProps) => {
         const Icon = item.icon;
         const isActive = activeSection === item.id;
         return (
-          <button
+          <a // Using <a> tag instead of <button> for routing intent
             key={item.id}
+            href={item.path} // Direct path for navigation
             onClick={() => onSectionChange(item.id)}
             className={`flex flex-col items-center justify-center w-full py-2 rounded-xl transition-all duration-200 ${
               isActive
@@ -30,7 +32,7 @@ const MobileNav = ({ activeSection, onSectionChange }: MobileNavProps) => {
           >
             <Icon className={`w-5 h-5 mb-0.5 ${isActive ? "fill-primary/20" : ""}`} />
             <span className="text-[10px] font-medium">{item.label}</span>
-          </button>
+          </a>
         );
       })}
     </nav>
