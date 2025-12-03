@@ -13,7 +13,8 @@ const MainLayout = () => {
 
     return (
         <div className="min-h-screen bg-background">
-            <MobileNav activeSection={activeSection} onSectionChange={setActiveSection} />
+            {/* <MobileNav activeSection={activeSection} onSectionChange={setActiveSection} /> */}
+            <MobileNav />
             
             {/* Centered container for the layout */}
             <div className="max-w-7xl mx-auto flex">
