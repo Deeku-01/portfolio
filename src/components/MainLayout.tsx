@@ -1,44 +1,43 @@
 // fileName: MainLayout.tsx
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
+import TopBar from "@/components/TopBar";
 import ProfileHeader from "@/components/ProfileHeader";
-import ImageWithModal from "@/components/Image";
+
 import MusicButton from "@/components/MusicButton";
-import { useState } from "react";
-import { Outlet } from "react-router-dom"; // Hook to render child routes
+import { Outlet } from "react-router-dom";
+import ImageWithModal from "./Image";
 
 const MainLayout = () => {
-    // State is maintained here to manage sidebar/mobile navigation state visually
-    const [activeSection, setActiveSection] = useState("home"); 
-
-    return (
-        <div className="min-h-screen bg-background">
-            {/* <MobileNav activeSection={activeSection} onSectionChange={setActiveSection} /> */}
-            <MobileNav />
-            
-            {/* Centered container for the layout */}
-            <div className="max-w-7xl mx-auto flex">
-                
-                {/* 1. Persistent Sidebar */}
-                <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} /> 
-                
-                {/* 2. Main Content Wrapper */}
-                <main className="flex-1 min-h-screen px-8 py-12 lg:py-16">
-
-                    {/* 3. Persistent Profile Header Block */}
-                    <div className="flex items-end gap-6 mb-8"> 
-                        <ImageWithModal /> 
-                        <ProfileHeader />
-                    </div>
-                    
-                    {/* 4. The content of the specific route (Index, Projects, Experience) renders here */}
-                    <Outlet />
-                    
-                </main>
-                <MusicButton />
-            </div>
-        </div>
-    );
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Top Bar - Desktop */}
+      <TopBar />
+      
+      {/* Mobile Nav - only visible on mobile */}
+      <MobileNav />
+      
+      {/* Main Layout Container */}
+      <div className="max-w-7xl mx-auto flex relative pt-16 md:pt-20">
+        {/* Sidebar */}
+        <Sidebar />
+        
+        {/* Main Content */}
+        <main className="flex-1 min-h-screen px-4 sm:px-8 py-6 md:py-12">
+          {/* Profile Header Section - FIX 1: Changed items-start to items-end for base alignment */}
+          <div className="flex items-end gap-6 mb-12"> 
+            <ImageWithModal />
+            <ProfileHeader />
+          </div>
+          
+          {/* Page Content - renders child routes */}
+          <Outlet />
+        </main>
+      </div>
+      
+      <MusicButton />
+    </div>
+  );
 };
 
 export default MainLayout;

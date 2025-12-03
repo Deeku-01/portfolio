@@ -10,7 +10,7 @@ export default function ImageWithModal() {
     <>
       {/* Clickable Image Thumbnail */}
       <div 
-        className="w-20 h-20 rounded-lg overflow-hidden bg-gradient-to-br from-blue-500/20 to-blue-500/40 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
+        className="w-30 h-20 rounded-lg overflow-hidden bg-gradient-to-br from-blue-500/20 to-blue-500/40 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
         onClick={() => setIsOpen(true)}
       >
         {/* Replace with your image */}
