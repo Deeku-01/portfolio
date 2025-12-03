@@ -1,5 +1,8 @@
 // fileName: Sidebar.tsx
+
 import { Home, Briefcase, FolderOpen, FileText } from "lucide-react";
+import { NavLink } from "react-router-dom";
+// Assuming you will use a wrapper around this to inject the routing link functionality
 
 interface SidebarProps {
   activeSection: string;
@@ -7,35 +10,41 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { id: "home", label: "Home", icon: Home },
-  { id: "experience", label: "Experience", icon: Briefcase },
-  { id: "projects", label: "Projects", icon: FolderOpen },
-  // { id: "articles", label: "Articles", icon: FileText },
+  { id: "home", label: "Home", icon: Home, path: "/" }, // Added path
+  { id: "experience", label: "Experience", icon: Briefcase, path: "/experience" }, // Added path
+  { id: "projects", label: "Projects", icon: FolderOpen, path: "/projects" }, // Added path
+  // Articles removed
 ];
 
 const Sidebar = ({ activeSection, onSectionChange }: SidebarProps) => {
   return (
     <aside className="fixed left-0 top-0 h-screen w-64 p-6 hidden lg:flex flex-col border-r border-border bg-background/50 backdrop-blur-sm z-40">
-      {/* Profile / Brand Section - Option 1: Initials & Role */}
-      <div className="mb-12 flex flex-col gap-1"> 
-        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg mb-2">
-           DV
+     {/* Abstract geometric mark */}
+      <div className="mb-10 group cursor-pointer">
+        <div className="relative w-10 h-10">
+          {/* Rotating outer ring */}
+          <div className="absolute inset-0 border-2 border-accent-link/30 rounded-lg rotate-45 group-hover:rotate-[135deg] transition-transform duration-700" />
+          {/* Inner square */}
+          <div className="absolute inset-2 bg-gradient-to-br from-accent-link/20 to-transparent rounded-sm group-hover:scale-110 transition-transform duration-300" />
+          {/* Center dot */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-accent-link group-hover:scale-150 transition-transform duration-300" />
+          </div>
         </div>
-        <h2 className="font-bold text-xl">Software Developer</h2>
-        <p className="text-sm text-muted-foreground">Associate Software Developer</p>
-        <p className="text-xs text-muted-foreground mt-1">@Oracle</p>
       </div>
       
       {/* Navigation */}
       <nav className="flex flex-col gap-2">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = activeSection === item.id;
+          // Note: isActive logic remains based on ID, but the path should be used for actual navigation
+          const isActive = activeSection === item.id; 
           
           return (
-            <button
+            <NavLink // Changed button to <a> for routing clarity
               key={item.id}
-              onClick={() => onSectionChange(item.id)}
+              to={item.path} // Use href for direct path navigation
+              onClick={() => onSectionChange(item.id)} // Keep state change for mobile/internal logic
               className={`flex items-center gap-3 text-left px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                 isActive 
                   ? "bg-primary/10 text-primary translate-x-1" 
@@ -44,7 +53,7 @@ const Sidebar = ({ activeSection, onSectionChange }: SidebarProps) => {
             >
               <Icon className={`w-4 h-4 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
               {item.label}
-            </button>
+            </NavLink>
           );
         })}
       </nav>

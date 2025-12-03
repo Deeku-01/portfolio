@@ -1,120 +1,64 @@
 // fileName: Projects.tsx
-import { ExternalLink, Github, Folder } from "lucide-react";
+import ProjectCard from "./ProjectCard";
 
-interface Project {
-  id: number;
-  title: string;
-  description: string[];
-  tags: string[];
-  github?: string;
-  demo?: string;
-  image: string;
-}
-
-const projects: Project[] = [
+const projectsData = [
   {
-    id: 1,
+    // Project 1: Crypto Exchange Platform
+    image: "/images/proj/crypto.png",
     title: "Crypto Exchange Platform",
-    description: [
-      "Built a crypto exchange platform with live tickers, depth charts, and real-time order books.",
-      "Created a WebSocket pub/sub system to send live market data to clients.",
-      "Used Redis for in-memory order books and fast order matching.",
-    ],
-    tags: ["TypeScript", "Next.js", "Node.js", "Redis", "WebSockets"],
-    github: "https://github.com/Deeku-01",
-    image: "📈",
+    date: "2024", // Assuming year of development
+    level: "Advanced" as const,
+    categories: ["FULL-STACK", "FINANCE", "WEB SOCKETS"],
+    description:
+      "A high-performance crypto exchange platform featuring live tickers, depth charts, and real-time order books. The system uses a WebSocket pub/sub model for sending live market data and Redis for managing in-memory order books and fast order matching. Implemented limit orders, market orders, bid-ask spread, and market maker simulation.",
+    isConfidential: false,
+    techStack: ["TypeScript", "Next.js", "Node.js", "Redis", "WebSockets", "PostgreSQL"],
+    detailUrl: "#", 
   },
   {
-    id: 2,
-    title: "UpBartr",
-    description: [
-      "Built a collaborative platform where users can exchange skills and services without monetary transactions.",
-      "Implemented skill listing, search, and user-to-user matching features.",
-    ],
-    tags: ["React", "Express", "Prisma", "Socket.io", "TypeScript"],
-    github: "https://github.com/Deeku-01",
-    image: "🔄",
+    // Project 2: UpBartr
+    image: "/images/proj/Upbartr.png",
+    title: "UpBartr (Skill Exchange Platform)",
+    date: "2024", // Assuming year of development
+    level: "Intermediate" as const,
+    categories: ["COMMUNITY", "FULL-STACK", "REAL-TIME"],
+    description:
+      "A collaborative platform built to facilitate the exchange of skills and services without monetary transactions. Features include comprehensive skill listing, search capabilities, user-to-user matching, and real-time chat integration using Socket.io for seamless negotiation. The backend is scalable and type-safe using Prisma ORM and PostgreSQL.",
+    isConfidential: false,
+    techStack: ["React", "Express", "Prisma", "TypeScript", "Socket.io", "Tailwind CSS", "PostgreSQL", "Radix UI", "Zod"],
+    detailUrl: "#", 
   },
   {
-    id: 3,
-    title: "Metaverse Game",
-    description: [
-      "Built a real-time 2D virtual world with multiplayer avatar movement and state sync over WebSockets.",
-      "Built a modular monorepo architecture using Turborepo.",
-    ],
-    tags: ["React", "Express", "Socket.io", "TypeScript", "Turborepo"],
-    github: "https://github.com/Deeku-01",
-    image: "🎮",
+    // Project 3: Metaverse Game
+    image: "/images/proj/MetaVGame.png",
+    title: "Real-time 2D Metaverse Game",
+    date: "2024", // Assuming year of development
+    level: "Advanced" as const,
+    categories: ["WEB SOCKETS", "GAMING", "ARCHITECTURE"],
+    description:
+      "Engineered a real-time 2D virtual world featuring multiplayer avatar movement and state synchronization via WebSockets. The project uses a modular monorepo architecture (Turborepo) for managing scalable frontend and Express/Socket.io backend code. Followed Test-Driven Development (TDD) using Jest for reliable codebase maintenance.",
+    isConfidential: false,
+    techStack: ["React", "Express", "Prisma", "WebSockets (Socket.io)", "TypeScript", "Turborepo", "Jest", "PostgreSQL"],
+    detailUrl: "#", 
   },
+  // The original fourth project is removed to focus on the three core resume projects.
 ];
 
 const Projects = () => {
   return (
-    <div className="mb-20 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-      <h2 className="section-title mb-6 flex items-center gap-2">
-        <Folder className="w-5 h-5" /> Projects
-      </h2>
+    <section>
+      {/* Header */}
+      <h1 className="font-display text-4xl md:text-5xl font-semibold text-foreground mb-8">
+        Projects
+      </h1>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="group flex flex-col bg-card border border-border/60 rounded-xl p-5 hover:border-primary/50 transition-colors duration-300"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">
-                {project.image}
-              </div>
-              <div className="flex items-center gap-3 opacity-70 group-hover:opacity-100 transition-opacity">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                )}
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                )}
-              </div>
-            </div>
-
-            <h3 className="font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
-              {project.title}
-            </h3>
-
-            {/* START: Updated Description Rendering */}
-            <ul className="space-y-1 text-muted-foreground text-sm leading-relaxed mb-6 flex-1 list-disc ml-4">
-               {project.description.map((item, index) => (
-                 <li key={index} className="pl-1">{item}</li>
-               ))}
-            </ul>
-            {/* END: Updated Description Rendering */}
-
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {project.tags.slice(0, 4).map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2 py-1 bg-secondary/50 text-secondary-foreground text-xs rounded-md border border-transparent hover:border-border transition-colors"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projectsData.map((project) => (
+          <ProjectCard key={project.title} {...project} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
