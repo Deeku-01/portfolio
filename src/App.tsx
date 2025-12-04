@@ -9,7 +9,9 @@ import NotFound from "./pages/NotFound";
 import WorkExperience from "@/components/WorkExperience";
 import Projects from "@/components/Projects";
 
+//vercell analytics and speed insights
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const queryClient = new QueryClient();
 
@@ -19,6 +21,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <Analytics/>
+      <SpeedInsights/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>
