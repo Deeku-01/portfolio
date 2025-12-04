@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound";
 import WorkExperience from "@/components/WorkExperience";
 import Projects from "@/components/Projects";
 
+import { Analytics } from "@vercel/analytics/react"
+
 const queryClient = new QueryClient();
 
 const App = () => (
